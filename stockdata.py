@@ -64,11 +64,16 @@ def load_stock_data(stockfile):
     """
     lst = []
     with open(stockfile, 'rb') as df:
-            block = df.read(32)
+
 
             while True:
-                sd = struct.unpack('iiiiifii', block)
-                lst.append(sd)
+
+                block = df.read(32)
+                if len(block) < 32:
+                    break
+                else:
+                    sd = struct.unpack('iiiiifii', block)
+                    lst.append(sd)
     return lst
 
 
